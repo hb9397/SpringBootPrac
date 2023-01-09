@@ -1,10 +1,20 @@
+server:
+  port: 80
+
 spring:
-  mvc:
-    view:
-      prefix: /WEB-INF/views/
-      suffix: .jsp
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
     cache: false
-    view-names: thymeleaf/*
+
+
+#spring:
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/views/
+#      suffix: .jsp
+#  thymeleaf:
+#    prefix: classpath:/templates/
+#    suffix: .html
+#    cache: false
+#    view-names: thymeleaf/*
