@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+반복문 사용</br></br>
+<ul>
+    <li th:each="vo, state : ${list}">
+        [[${state.index}]] -- [[${vo}]]
+    </li>
+</ul>
+</br>
+-----------------------------------------------------------------------------------------------------------------------
+</br>
+반복문과 if 문 사용</br></br>
+<ul>
+    <li th:each="vo, state : ${list}" th:if="${state.index % 5 == 0}">
+        [[${state.index}]] -- [[${vo}]]
+    </li>
+</ul>
+</br>
+-----------------------------------------------------------------------------------------------------------------------
+</br>
+반복문과 if ~ unless 문 사용 </br></br>
+<ul>
+    <li th:each="vo, state : ${list}">
+        <span th:if="${state.index % 5 == 0}">[[${state.index}]] -- [[${vo}]]</span>
+        <span th:unless="${state.index % 5 == 0}">[[${state.index}]] -- [[${vo}]]</span>
+    </li>
+</ul>
+</br>
+-----------------------------------------------------------------------------------------------------------------------
+</br>
+반복문과 삼항 연산자 사용 </br></br>
+<ul>
+    <li th:each="vo, state : ${list}">
+        <span th:text="${state.index % 5 == 0} ? ${vo.sno} : ${vo.last}">[[${state.index}]] -- [[${vo}]]</span>
+    </li>
+</ul>
+</br>
+-----------------------------------------------------------------------------------------------------------------------
+</br>
+th:block 을 이용한 제어문 사용</br></br>
+<ul>
+    <li th:each="vo, state : ${list}">
+        <th:block th:switch="${state.index % 5 == 0}">
+            <span th:case=true th:text="${state.index}"></span>
+            <span th:case=false th:text="${state.index}">  </span>
+        </th:block>
+    </li>
+</ul>
+</body>
+</html>
+<body>
+
+</body>
+</html>
