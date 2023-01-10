@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>format</title>
+</head>
+<body>
+<ul
+  <li th:each="vo:${list}">
+      [[${#temporals.format(vo.regTime, 'YYYY/MM/dd')}]]
+  </li>
+</ul>
+</body>
+</html>

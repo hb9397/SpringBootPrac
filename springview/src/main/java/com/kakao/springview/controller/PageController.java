@@ -3,6 +3,7 @@ package com.kakao.springview.controller;
 import com.kakao.springview.domain.SampleVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -67,4 +68,24 @@ public class PageController {
                 }).collect(Collectors.toList());
         model.addAttribute("list", list);
     }
+
+    @GetMapping({"/exlink", "/exformat"})
+    public void exlink(Model model){
+        List <SampleVO> list  = new ArrayList<>();
+        for(int i=0; i<10; i++){
+            SampleVO vo = SampleVO.builder()
+                    .sno((long) i)
+                    .first("First...")
+                    .last("Last...")
+                    .regTime(LocalDateTime.now())
+                    .build();
+            list.add(vo);
+        }
+        model.addAttribute("list", list);
+    }
+
+    // 단순히 레이아웃을 전환
+    @GetMapping("/exlayout1")
+        public void exlayout(){}
+
 }
