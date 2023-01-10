@@ -1,6 +1,7 @@
 package com.kakao.springbootjpaprca;
 
 import com.kakao.springbootjpaprca.domain.Memo;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.test.annotation.Commit;
 
 
 import java.util.List;
@@ -116,6 +118,47 @@ public class RepositoryTest {
         Page<Memo> result = memoRepository.findAll(pageable);
 
         for(Memo memo : result.getContent()){
+            System.out.println(memo);
+        }
+    }
+
+    @Test
+    public void queryMethod1(){
+        // MemoRepository 인터페이스에 선언한 from 부터 to 까지 조회해서 Mno를 기준으로 내림차순하는 메서드
+        List<Memo> list = memoRepository.findByMnoBetweenOrderByMnoDesc(30L, 40L);
+
+        for(Memo memo : list){
+            System.out.println(memo);
+        }
+    }
+
+    @Test
+    public void queryMethod2() {
+        Pageable pageable = PageRequest.of(1, 5);
+
+        //  Mno가 0 부터 50 사이의 데이터를 1 페이지에 5개씩 나눠서 1페이지 조회
+        Page<Memo> result = memoRepository.findByMnoBetween(0L, 50L, pageable);
+
+        for(Memo memo : result){
+            System.out.println(memo);
+        }
+    }
+
+    @Test
+    // 특정한 query 작업에는 트랜젝션을 적용하지 않으면 예외가 발생
+    // Commit을 하지 않으면 Application에는 반영되지만 DB에는 반영되지 않느다.
+    @Transactional
+
+    // 트랜잭션이 적용되면 자동 Commit 되지 않으므로 Commit 을 호출해야 실제 DB 작에 반영된다.
+    @Commit
+    // 특정 Mno 이하 데이터는 삭제
+    public void queryMethod3(){
+        memoRepository.deleteByMnoLessThan(10L);
+
+
+        // 전체 select query 로 확인
+        List<Memo> list = memoRepository.findAll();
+        for(Memo memo : list){
             System.out.println(memo);
         }
     }
