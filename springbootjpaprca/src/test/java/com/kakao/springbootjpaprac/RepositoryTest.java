@@ -1,11 +1,11 @@
-package com.kakao.springbootjpaprca;
+package com.kakao.springbootjpaprac;
 
-import com.kakao.springbootjpaprca.domain.Memo;
+import com.kakao.springbootjpaprac.domain.Memo;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import com.kakao.springbootjpaprca.persistence.MemoRepository;
+import com.kakao.springbootjpaprac.persistence.MemoRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Commit;
 
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
@@ -160,6 +161,39 @@ public class RepositoryTest {
         List<Memo> list = memoRepository.findAll();
         for(Memo memo : list){
             System.out.println(memo);
+        }
+    }
+
+    @Test
+    public void testUpdateQuery() {
+
+
+        System.out.println(memoRepository.updateMemoText(11, "문자열"));
+
+        System.out.println(memoRepository.updateMemoText(Memo.builder().mno(12L).memoText("문자열").build()));
+    }
+
+    @Test
+    public void testSelectQuery(){
+        // mno 내림 차순으로 정렬해서 0번 페이지 10개의 데이터를 가져오는 Pagealbe 객체
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("mno").descending());
+
+        Page<Memo> result = memoRepository.getListWithQuery(50L, pageable);
+
+        for (Memo memo : result.getContent()){
+            System.out.println(memo);
+        }
+    }
+
+    @Test
+    public void testObjectQuery() {
+        // mno의 내림차순으로 정렬해서 0번 페이지 10개의 데이터를 가져오는
+        // Pageable 객체
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("mno").descending());
+        Page<Object[]> result = memoRepository.getObjectWithQuery(
+                50L, pageable);
+        for (Object[] memo : result.getContent()) {
+            System.out.println(Arrays.toString(memo));
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.kakao.springbootjpaprca.domain;
+package com.kakao.springbootjpaprac.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
