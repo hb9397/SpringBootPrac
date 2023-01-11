@@ -71,6 +71,7 @@ public class PageResponseDTO <DTO, EN>{
 
     // Page를 함수로 적용해서 List로 변환해주는 메서드
     // 첫번째 매개변수가 Page 단위의 Entity이고 두번째 는 데이터 변환을 위한 메서드
+    // 첫번째 매개변수는 반환값을 만들기 위해 사용할 변수, 두번째 매개변수는 반환값
     public PageResponseDTO(Page<EN> result, Function<EN, DTO> fn){
         // EN(Entity) DTO(클래스 타입) 을 변환해주는 함수를 매개변수로 받아서 DTO 타입의 List로 변환해준다.
         // Java 에서 는 함수를 매개변수로 받을수 없어서 Function 인터 페이스를 매개변수로 사용

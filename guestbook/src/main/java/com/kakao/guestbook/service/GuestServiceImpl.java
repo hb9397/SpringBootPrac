@@ -19,9 +19,14 @@ import java.util.function.Function;
 
 @Log4j2
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor // final 키워드로 주입받아야 한다.
 public class GuestServiceImpl implements GuestBookService{
     // Service는 Respository 를 주입받아서 사용한다.
+    // GuestRepository는 JpaRepository, QuerydslPredicateExecutor 의 인터페이스를 상속 받는데
+    // 이 둘의 인터페이스 생성자를 guestBookRepository 가 받아올 때
+    // @RequiredArgsConstructor 어노테이션으로 생성자를 주입받는다고 명시 했기 때문에 final 키워드로 선언한 guestBookRepository 가
+    // GuestServiceImpl 생성자 안에 주입된다.
+    // 또한 GuestRepository는 JpaRepository, QuerydslPredicateExecutor의 인터페이스의 메서드나 함수들을 상속받기 때문에 사용할 수 있다.
     private final GuestBookRepository guestBookRepository;
 
     public Long register(GuestBookDTO dto){

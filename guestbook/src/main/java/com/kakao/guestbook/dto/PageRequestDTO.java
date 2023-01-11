@@ -15,6 +15,7 @@ public class PageRequestDTO {
     private int page;
     private int size;
 
+    // DTO 생성자 호출시 기본값이 바로 생성되어서 호출된다.
     public PageRequestDTO(){
         // 기본값 설정
         this.page= 1;
