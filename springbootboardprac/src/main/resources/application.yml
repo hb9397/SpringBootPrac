@@ -1,0 +1,35 @@
+# ????
+server:
+  port: 80
+
+
+#  DB ?? ??
+spring:
+  datasource:
+    url: jdbc:mariadb://localhost:3306/jpaPrac
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    password: 8236
+
+# JPA ??
+  jpa:
+    hibernate:
+    # ??? ?? ?? ? ??
+      ddl-auto: update
+    properties:
+        hibernate:
+          # hibernate query format? ??
+          format_sql: true
+          #hibernate query? ??? ??
+          show_sql: true
+
+# template engine - thymeleaf ??
+  thymeleaf:
+  # view ???? ??? ??
+    cache: false
+
+  # ?? ??
+  logging:
+    level:
+      # sql ? ? ??? ??? ?? ??
+      org.hibernate.type.descriptor.sql: trace
