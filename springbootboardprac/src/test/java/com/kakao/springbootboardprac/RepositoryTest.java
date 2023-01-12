@@ -81,12 +81,14 @@ public class RepositoryTest {
     }
 
     @Test
-    @Transactional
+    @Transactional // 두개의 쿼리가 처리 될 때까지 JPA의 connection을 끊지 않는다.
     // 게시글 하나를 가져오는 메서드
     public void readBoard(){
         Optional <Board> result = boardRepository.findById((100L));
+        // 첫번째 쿼리
         Board board = result.get();
         System.out.println(board);
+        // 두번째 쿼리
         System.out.println(board.getWriter());
     }
 
