@@ -111,7 +111,8 @@ public class SearchBoardRepositoryImpl extends QuerydslRepositorySupport impleme
         // 만약 그룹화 하지 않으면
         /*
          위처럼 쿼리를 작성한 경우 댓글들이 참조하는 게시글번호(bno) 댓글의 개수만큼 중복되어서 결과에 담아서 가져오게 된다.
-          bno=1 reply=5 일때 1번 게시글에 댓글의 개수가 5개 인데 1이라는 bno를 가진 게시글의 기본키를 5개 가져오고 댓글 개수는 1개씩 밖에 못가져옴
+          bno=1 reply=5 일때 1번 게시글에 댓글의 개수가 5개 인데 1이라는 bno를 가진 게시글의 기본키를 5개 가져오고
+          가져온 게시글에 대한 댓글을 한개씩 가져오게 된다..
         */
         tuple.groupBy(board);
 

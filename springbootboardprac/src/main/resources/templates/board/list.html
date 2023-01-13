@@ -15,7 +15,7 @@
       <div class="input-group">
         <input type="hidden" name="page" value="1"/>
         <div class="input-group-prepend">
-          <select class="custom-select" name="type">
+          <select class="custom-select" name="type" id="selectOption">
             <option th:selected="${pageRequestDTO.type == null}">
               ----
             </option>
@@ -76,15 +76,21 @@
     <script th:inline="javascript">
       // 검색 폼 찾아오기
       let searchForm = document.getElementById("searchForm");
+      let inputSearch =document.getElementById("input-content");
+      let selectOption = document.getElementById("selectOption")
 
       // 검색 데이터 전달하기
       document.getElementById("btn-search").addEventListener("click", (e)=>{
+
         searchForm.submit();
       });
 
       // 검색어 조건 삭제하기
+      // 조건을 삭제할 때 어떻게 동작할지 선택해서 작동하게 설정
       document.getElementById("btn-clear").addEventListener("click", (e)=>{
-        searchForm.reset();
+        inputSearch.value = "";
+        selectOption.value = null;
+        //searchForm.reset();
         searchForm.submit();
       });
     </script>
