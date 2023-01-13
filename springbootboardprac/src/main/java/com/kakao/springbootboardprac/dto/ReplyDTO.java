@@ -1,4 +1,4 @@
-package com.kakao.springbootboardprac.board;
+package com.kakao.springbootboardprac.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,14 +11,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class BoardDTO {
-    // 출력할 데이터
+public class ReplyDTO {
+    private Long rno;
+    private String text;
+    private String replyer;
     private Long bno;
-    private String title;
-    private String content;
-    private String writerName;
-    private String writerEmail;
     private LocalDateTime regDate;
     private LocalDateTime modDate;
-    private int replyCount;
 }

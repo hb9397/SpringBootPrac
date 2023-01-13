@@ -15,7 +15,8 @@
     Spring Data JPA랑 JPA랑은 다른 걸 또 알아야 하드라
     Spring에서 JPA를 편하게 쓰기 위한게 Spring Data JPA이고 그냥 JPA를 사용하려면 우리 인터페이스 쓰는것보다 구체적으로 작성하드라
     */
-    public interface BoardRepository extends JpaRepository<Board, Long> {
+    // Proxy Pattern 을 이용해서 SearchBoardRepository 인터페이스를 상속받아 해당 인터페이스 구현체의 메서드를 사용할 수 있다.
+    public interface BoardRepository extends JpaRepository<Board, Long>, SearchBoardRepository { //
         // Board 데이터를 가져올 때 Writer 정보까지 한번에 가져오는 메서드 - Board 에 지연로딩을 사용했기 때문에 필요
         @Query("select b, w from Board b left join b.writer w where b.bno=:bno")
         public Object getBoardWithWriter(@Param("bno") Long bno);

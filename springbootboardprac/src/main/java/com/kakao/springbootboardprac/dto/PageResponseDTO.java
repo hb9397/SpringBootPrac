@@ -1,4 +1,4 @@
-package com.kakao.springbootboardprac.board;
+package com.kakao.springbootboardprac.dto;
 
 import lombok.Data;
 import org.springframework.data.domain.Page;

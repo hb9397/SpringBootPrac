@@ -1,14 +1,12 @@
 package com.kakao.springbootboardprac;
 
-import com.kakao.springbootboardprac.board.BoardDTO;
-import com.kakao.springbootboardprac.board.PageRequestDTO;
-import com.kakao.springbootboardprac.board.PageResponseDTO;
-import com.kakao.springbootboardprac.domain.Board;
+import com.kakao.springbootboardprac.dto.BoardDTO;
+import com.kakao.springbootboardprac.dto.PageRequestDTO;
+import com.kakao.springbootboardprac.dto.PageResponseDTO;
 import com.kakao.springbootboardprac.service.BoardService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Pageable;
 
 @SpringBootTest
 public class ServiceTest {

@@ -1,4 +1,4 @@
-package com.kakao.springbootboardprac.board;
+package com.kakao.springbootboardprac.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

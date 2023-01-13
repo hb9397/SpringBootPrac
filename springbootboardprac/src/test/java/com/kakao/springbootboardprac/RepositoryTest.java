@@ -129,14 +129,46 @@ public class RepositoryTest {
         }
     }
 
-        @Test void testJoin3(){
-            Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
+    @Test
+    void testJoin3(){
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
 
-            Page <Object []> result = boardRepository.getBoardWithReplyCount(pageable);
+        Page <Object []> result = boardRepository.getBoardWithReplyCount(pageable);
 
-            result.get().forEach(row -> {
-                Object [] ar = (Object []) row;
-                System.out.println(Arrays.toString(ar));
-            });
+        result.get().forEach(row -> {
+            Object [] ar = (Object []) row;
+            System.out.println(Arrays.toString(ar));
+        });
+    }
+
+    @Test
+    public void testSearchTest1(){
+        boardRepository.search1();
+    }
+
+    @Test
+    public void testSearchPage() {
+        Pageable pageable = PageRequest.of(0,10,
+                Sort.by("bno").descending()
+                        .and(Sort.by("title").ascending()));
+
+        // 제목에 1이 포함된 데이터 검색
+        Page<Object[]> result = boardRepository.searchPage("t", "1", pageable);
+
+        // Object 배열의 결과는 순회로 값을 확인
+        // System.out.println(result.getContent());
+        for(Object [] row : result.getContent()){
+            System.out.println(Arrays.toString(row));
         }
+    }
+
+
+    @Test
+    // 게시글 가지고 댓글 가져오는 메서드
+    public void testListReply(){
+        List<Reply> replyList = replyRepository.findByBoardOrderByRno(Board.builder()
+                        .bno(27L).build());
+
+        replyList.forEach(reply -> System.out.println(reply));
+    }
 }

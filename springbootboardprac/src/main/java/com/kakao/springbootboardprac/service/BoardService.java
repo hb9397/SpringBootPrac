@@ -1,8 +1,8 @@
 package com.kakao.springbootboardprac.service;
 
-import com.kakao.springbootboardprac.board.BoardDTO;
-import com.kakao.springbootboardprac.board.PageRequestDTO;
-import com.kakao.springbootboardprac.board.PageResponseDTO;
+import com.kakao.springbootboardprac.dto.BoardDTO;
+import com.kakao.springbootboardprac.dto.PageRequestDTO;
+import com.kakao.springbootboardprac.dto.PageResponseDTO;
 import com.kakao.springbootboardprac.domain.Board;
 import com.kakao.springbootboardprac.domain.Member;
 import jakarta.transaction.Transactional;

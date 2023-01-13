@@ -1,8 +1,8 @@
 package com.kakao.springbootboardprac.service;
 
-import com.kakao.springbootboardprac.board.BoardDTO;
-import com.kakao.springbootboardprac.board.PageRequestDTO;
-import com.kakao.springbootboardprac.board.PageResponseDTO;
+import com.kakao.springbootboardprac.dto.BoardDTO;
+import com.kakao.springbootboardprac.dto.PageRequestDTO;
+import com.kakao.springbootboardprac.dto.PageResponseDTO;
 import com.kakao.springbootboardprac.domain.Board;
 import com.kakao.springbootboardprac.domain.Member;
 import com.kakao.springbootboardprac.persistence.BoardRepository;
@@ -37,7 +37,7 @@ public class BoardServiceImpl implements BoardService{
     }
 
     // 목록 보기 메서드 구현
-    @Override
+    /*@Override
     public PageResponseDTO<BoardDTO, Object[]> getList(PageRequestDTO pageRequestDTO){
         log.info(pageRequestDTO);
 
@@ -49,8 +49,23 @@ public class BoardServiceImpl implements BoardService{
                 pageRequestDTO.getPageable(Sort.by("bno").descending()));
 
         return new PageResponseDTO<>(result, fn);
-    }
+    }*/
 
+    // 목록 보기 메서드에 검색에 대한 설정이 적용되게 처리하도록 수정
+    public PageResponseDTO<BoardDTO, Object[]> getList(PageRequestDTO pageRequestDTO){
+        log.info(pageRequestDTO);
+
+        // Entity를 DTO로 변경하는 람다 인스턴스 생성
+        Function<Object [], BoardDTO> fn = (en -> entityToDTO((Board) en[0], (Member) en[1], (Long) en[2]));
+
+        // 목록 보기 요청 처리
+        Page<Object []> result = boardRepository.searchPage(
+                pageRequestDTO.getType(),
+                pageRequestDTO.getKeyword(),
+                pageRequestDTO.getPageable(Sort.by("bno").descending()));
+
+        return new PageResponseDTO<>(result, fn);
+    }
     // 상세보기 처리를 위한 메서드 구현
     @Override
     public BoardDTO get(Long bno){
