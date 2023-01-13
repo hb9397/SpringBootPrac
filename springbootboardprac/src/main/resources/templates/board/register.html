@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
+    <th:block th:fragment="content">
+        <h1 class="mt-4">게시물 등록</h1>
+        <form th:action="@{/board/register}" th:method="post">
+            <div class="form-group">
+                <label >제목</label>
+                <input type="text" class="form-control" name="title" placeholder="제목 입력">
+            </div>
+            <div class="form-group">
+                <label >본문</label>
+                <textarea class="form-control" rows="5" name="content"></textarea>
+            </div>
+            <div class="form-group">
+                <label >작성자</label>
+                <!--type에 text 대신에 email 값을 넣으면 @ 이정도는 알아서 유효성 검사를 해준다.-->
+                <input type="email" class="form-control" name="writerEmail"
+                       placeholder="Writer Email ">
+            </div>
+            <button type="submit" class="btn btn-primary">등록</button>
+        </form>
+    </th:block>
+</th:block>
