@@ -3,10 +3,14 @@ package com.kakao.springbootboardprac;
 import com.kakao.springbootboardprac.dto.BoardDTO;
 import com.kakao.springbootboardprac.dto.PageRequestDTO;
 import com.kakao.springbootboardprac.dto.PageResponseDTO;
+import com.kakao.springbootboardprac.dto.ReplyDTO;
 import com.kakao.springbootboardprac.service.BoardService;
+import com.kakao.springbootboardprac.service.ReplyService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 @SpringBootTest
 public class ServiceTest {
@@ -54,5 +58,27 @@ public class ServiceTest {
                 .content("내용 변경이다 ,.,,.")
                 .build();
         System.out.println(boardService.modify(dto));
+    }
+
+    // Reply 서비스 테스트
+    @Autowired
+    ReplyService replyService;
+
+    @Test
+    public void testReplyGet(){
+        // 게시글 번호로 댓글 가져오기
+        List<ReplyDTO> list = replyService.getList(45L);
+        list.forEach(dto -> System.out.println(dto));
+    }
+
+    @Test
+    public void testReplyRegister(){
+        // 게시글 등록 테스트
+        ReplyDTO replyDTO = ReplyDTO.builder()
+                        .text("댓글 삽입 테스트")
+                        .replyer("usesr1@kakao.com")
+                        .bno(45L)
+                       .build();
+        System.out.println(replyService.register(replyDTO));
     }
 }
