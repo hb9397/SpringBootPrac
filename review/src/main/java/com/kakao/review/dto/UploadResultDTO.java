@@ -26,4 +26,15 @@ public class UploadResultDTO implements Serializable {
         }
         return "";
     }
+
+    // Thumbnail 이미지 경로를 반환해주는 메서드
+    public String getThumbnailURL(){
+        try {
+            return URLEncoder.encode(uploadPath + "/s_" + uuid + fileName, "UTF-8");
+        }catch (UnsupportedEncodingException e){
+            System.out.println(e.getLocalizedMessage());
+            e.printStackTrace();
+        }
+        return "";
+    }
 }
