@@ -1,25 +1,25 @@
 package com.kakao.review.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
-// Serialiazable(직렬화)
-// 데이터를 전송할 때 객체 단위로 전송할 수 있도록 해주는 인터페이스
-public class UploadResultDTO implements Serializable {
-    private String fileName;
+@Builder
+public class MovieImageDTO {
+    private String imgName;
     private String uuid;
-    private String uploadPath;
+    private String path;
 
     // 실제 이미지 경로를 반환해주는 파생 속성(메서드)
     public String getImageURL(){
         try {
-            return URLEncoder.encode(uploadPath + "/" + uuid + fileName, "UTF-8");
+            return URLEncoder.encode(path + "/" + uuid + imgName, "UTF-8");
         }catch (UnsupportedEncodingException e){
             System.out.println(e.getLocalizedMessage());
             e.printStackTrace();
@@ -30,7 +30,7 @@ public class UploadResultDTO implements Serializable {
     // Thumbnail 이미지 경로를 반환해주는 파생 속성(메서드)
     public String getThumbnailURL(){
         try {
-            return URLEncoder.encode(uploadPath + "/s_" + uuid + fileName, "UTF-8");
+            return URLEncoder.encode(path + "/s_" + uuid + imgName, "UTF-8");
         }catch (UnsupportedEncodingException e){
             System.out.println(e.getLocalizedMessage());
             e.printStackTrace();
