@@ -96,7 +96,7 @@ public class RepositoryTest {
     @Transactional
     // 댓글 하나를 가져오는 메서드
     public void readReply(){
-        Optional <Reply> result = replyRepository.findById((100L));
+        Optional <Reply> result = replyRepository.findById((34L));
         Reply reply = result.get();
         System.out.println(reply);
         System.out.println(reply.getBoard());

@@ -8,6 +8,7 @@ import com.kakao.review.persistence.MemberRepository;
 import com.kakao.review.persistence.MovieImageRepository;
 import com.kakao.review.persistence.MovieRepository;
 import com.kakao.review.persistence.ReviewRepository;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,8 +16,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.test.annotation.Commit;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.IntStream;
 
@@ -92,11 +96,49 @@ public class RepositoryTest {
 
     @Test
     //JOIN Test
+    // 영화 목록 불러오는 테스트
     public void joinTest(){
         Pageable pageable = PageRequest.of(0,10, Sort.Direction.DESC, "mno");
         Page<Object[]> result = movieRepository.getList(pageable);
         for(Object[] objects : result.getContent()){
             System.out.println(Arrays.toString(objects));
         }
+    }
+
+    @Test
+    // 특정 영화 불러오는 테스트
+    public void detailTest() {
+        List<Object[]> list = movieRepository.getMovieWithAll(3L);
+        for (Object[] ar : list){
+            System.out.println(Arrays.toString(ar));
+        }
+    }
+
+    @Test
+    // 리뷰 정보를 가져오는 테스트
+    public void getReviewTest(){
+        Movie movie = Movie.builder().mno(96L).build();
+
+        List<Review> result = reviewRepository.findByMovie(movie);
+        result.forEach(review -> {
+            System.out.println(review.getReviewnum());
+            System.out.println(review.getMember().getEmail() );
+        });
+    }
+
+    @Test
+    @Transactional
+    @Commit
+    // 회원이 탈퇴했을 때 리뷰도 실제로 삭제하는 메서드 TEST
+    public void delteByMemberTest(){
+        Member member = Member.builder().mid(93L).build();
+        reviewRepository.deleteByMember(member);
+    }
+    @Test
+    @Transactional
+    @Commit
+    // 회원이 탈퇴 했을 때 작성된 리뷰는 남기되 리뷰를 작성한 회원의 정보를 없내는 메서드 TEST
+    public void updateByMember() {
+        reviewRepository.updateByMember(58L);
     }
 }
