@@ -19,6 +19,9 @@ repositories {
 }
 
 dependencies {
+    // AOP 의존성
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+
     // 썸네일 의존성
     implementation group: 'net.coobird', name:'thumbnailator', version: '0.4.12'
 
