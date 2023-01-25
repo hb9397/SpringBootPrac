@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+        <title>Title</title>
 </head>
 <body>
 멤버만 볼수 있는 페이지
+<div sec:authorize="hasRole('USER')">USER 권한</div>
+<div sec:authorize="hasRole('MANAGER')">Has MANAGER ROLE</div> <div sec:authorize="hasRole('ADMIN')">ADMIN 권한</div>
+<div sec:authorize="isAuthenticated()"> 로그인 성공한 유저에게만 보여지는 텍스트
+</div>
+사용자 이름 :<div sec:authentication="name"></div>
+
+허가된 권한 :<div sec:authentication="principal.authorities"> </div>
+
+<a href="/logout">로그아웃</a>
 </body>
+<script th:inline="javascript">
+    const auth = [[${#authentication.principal}]];
+    console.log(auth);
+    const errors = [[${errors}]] ;
+    console.log(errors);
+</script>
 </html>
