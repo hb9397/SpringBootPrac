@@ -63,6 +63,9 @@ public class CustomSecurityConfig {
         // 403 에러 발생시 커스텀 헨들러 호출
         httpSecurity.exceptionHandling().accessDeniedHandler(accessDeniedHandler());
 
+        // OAuth2 가 사용할 로그인 URL 설정
+        httpSecurity.oauth2Login().loginPage("/member/login");
+
         return httpSecurity.build();
     }
 

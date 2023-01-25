@@ -29,7 +29,7 @@ public class MemberServiceImpl implements MemberService {
 
         // 회원가입을 위해서 입력 받은 정보를 가지고 ClubMember Entity를 새성성
         ClubMember clubMember = ClubMember.builder()
-                . mid(memberJoinDTO.getMid())
+                .mid(memberJoinDTO.getMid())
                 .mpw(memberJoinDTO.getMpw())
                 .email(memberJoinDTO.getEmail())
                 .name(memberJoinDTO.getName())

@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ClubMemberJoinDTO {
-    private String  mid;
+    private String mid;
     private String mpw;
     private String email;
     private String name;

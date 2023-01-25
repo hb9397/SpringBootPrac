@@ -16,9 +16,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class MemberController {
     @GetMapping("/login")
-    public void login(String error, String logout) {
+    public void login(Exception error, String logout) {
         // error는 로그인이 실패했을 경우의 파라미터
         log.info("error: " + error);
+        System.out.println(error.getStackTrace());
+        System.out.println(error.getLocalizedMessage());
+        System.out.println(error);
 
         // logout은 로그아웃한 후 로그인으로 이동했을 때 파라미터
         log.info("logout: " + logout);
@@ -27,14 +30,14 @@ public class MemberController {
 
         }
         if (logout != null) {
-            log.info("[MemberContoller] logout !");
+            log.info("[MemberController] logout !");
 
         }
 
     }
 
     // 회원 가입 GET, POST 요청
-    private MemberService memberService;
+    private final MemberService memberService;
     // 회원가입 페이지로 이동
     @GetMapping("/join")
     public void join(){ // 일반적으로 회원가입으로 이동할 때는 매개변수, 반환값 이 없다.
@@ -49,6 +52,8 @@ public class MemberController {
             memberService.join(memberJoinDTO);
         }catch (Exception e){
             // 실패
+            log.warn(e);
+            System.out.println(e.getStackTrace());
             rattar.addFlashAttribute("error", "mid");
             return "redirect:/member/join";
         }

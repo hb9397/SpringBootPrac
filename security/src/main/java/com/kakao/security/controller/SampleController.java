@@ -1,6 +1,6 @@
 package com.kakao.security.controller;
 
-import com.kakao.security.security.dto.ClubMemberSecurityDTO;
+import com.kakao.security.dto.ClubMemberSecurityDTO;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
