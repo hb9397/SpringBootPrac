@@ -23,7 +23,7 @@ import javax.sql.DataSource;
 @Log4j2
 @RequiredArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-// 설정파일을 만들기 위한 애노테이션 or Bean을 등록하기 위한 애노테이션
+// 설정파일을 만들기 위한 애노테이션 or Bean을 등록하기 위한 애노테이션, 기본적인 Web보안을 활성화 하겠다는 의미
 @Configuration
 public class CustomSecurityConfig {
 

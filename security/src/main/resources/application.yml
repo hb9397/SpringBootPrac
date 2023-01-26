@@ -70,3 +70,12 @@ com:
   adamsoft:
     upload:
       path: C:\Users\user\Documents\ReviewProjectData
+
+# JWT 설정
+# Base64 를 이용한 HS512 알고리즘 사용할 것이기 때문에 512자 이상(64byte) 값을 입력
+# https://www.convertstring.com/ko/EncodeDecode/Base64Encode -> 문자열 치면 Base64 로 인코딩
+
+jwt:
+  header: Authorization
+  secret: 7Lm07Lm07Jik7YG065287Jqw65Oc7Iqk7L+o7JeQ7ISc7LKY7J2M7IKs7Jqp7ZW067O064qUU3ByaW5nU2VjdXJpdHnsmYBKV1TrpbzsnbTsmqntlbTshJzsnbjspp3snYTrsJvslYTrs7TripTsl7DsirXsnYTtlbTrs7TqsqDsirXri4jri6TsnpjrkJjqsqDso6Dqt7jrn7TqsoHri4jri6TsoJzrsJxIMjUxMuyVjOqzoOumrOymmOydhOyCrOyaqe2VoOqyg+ydtOq4sOuVjOusuOyXkDUxMuyekOydtOyDgeycvOuhnO2CpOulvOunnuy2peuLiOuLpA==
+  token-validity-in-seconds: 86400
