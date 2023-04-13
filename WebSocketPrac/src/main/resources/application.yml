@@ -1,0 +1,16 @@
+server:
+  port: 9999
+
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: hb19971127@gmail.com
+    password: hxudfzpstaknyblq
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+
+  thymeleaf:
+    cache: false
+

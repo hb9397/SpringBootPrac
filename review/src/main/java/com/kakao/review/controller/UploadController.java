@@ -1,9 +1,11 @@
 package com.kakao.review.controller;
 
 import com.kakao.review.dto.UploadResultDTO;
+
+import lombok.Value;
 import lombok.extern.log4j.Log4j2;
 import net.coobird.thumbnailator.Thumbnailator;
-import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
