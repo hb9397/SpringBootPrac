@@ -1,5 +1,4 @@
-/*
-package com.kakao.kafkaprac;
+package com.kakao.kafkapracconsumer;
 
 import java.io.IOException;
 
@@ -15,6 +14,4 @@ public class KafkaConsumer {
 	public void consume(String message) throws IOException {
 		log.info("Consumed message : {}", message);
 	}
-
 }
-*/
