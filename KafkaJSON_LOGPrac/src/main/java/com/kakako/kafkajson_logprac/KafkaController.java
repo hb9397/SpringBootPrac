@@ -21,9 +21,8 @@ public class KafkaController {
 	@PostMapping
 	@ResponseBody
 	public String sendMessage(@RequestBody ChatMessage chatmessage) {
-		System.out.println("chatmessage = " + chatmessage.getSender());
+		log.warn("msg: {}", chatmessage.getContext());
 		producerService.sendMessage(chatmessage);
-
 		return "success";
 	}
 

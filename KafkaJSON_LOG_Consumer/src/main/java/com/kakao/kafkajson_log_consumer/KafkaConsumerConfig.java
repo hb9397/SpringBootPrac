@@ -23,9 +23,11 @@ public class KafkaConsumerConfig {
 	public ConsumerFactory<String, ChatMessage> consumerFactory() {
 		Map<String, Object> config = new HashMap<>();
 		config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, servers);
-		config.put(ConsumerConfig.GROUP_ID_CONFIG, "testgroup");
+		config.put(ConsumerConfig.GROUP_ID_CONFIG, "beom");
 
-		return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(), new JsonDeserializer<>(ChatMessage.class));
+		return new DefaultKafkaConsumerFactory<>(config,
+			new StringDeserializer(),
+			new JsonDeserializer<>(ChatMessage.class, false));
 	}
 
 	@Bean
