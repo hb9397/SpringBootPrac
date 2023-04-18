@@ -40,4 +40,4 @@ public class KafkaProducerConfig {
 	public KafkaTemplate<String, ChatMessage> kafkaTemplate() {
 		return new KafkaTemplate<>(producerFactory());
 	}
-}
+}//
