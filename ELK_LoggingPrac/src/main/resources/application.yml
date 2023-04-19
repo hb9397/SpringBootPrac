@@ -1,0 +1,17 @@
+
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+
+
+server:
+  port: 9001
+  tomcat:
+    accesslog:
+      enabled: true
+      directory: logs
+      suffix: .log
+      prefix: access_log
+      file-date-format: .yyyy-MM-dd
+      pattern: '%{yyyy-MM-dd HH:mm:ss}t %s %r %{User-Agent}i %{Referer}i %a %b'
+    basedir: .
