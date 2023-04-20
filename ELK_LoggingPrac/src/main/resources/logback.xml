@@ -1,40 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <appender name="LOG-KAFKA"
-              class="com.github.danielwegener.logback.kafka.KafkaAppender">
-        <encoder
-            class="com.github.danielwegener.logback.kafka.encoding.LayoutKafkaMessageEncoder">
+    <appender name="LOG-KAFKA" class="com.github.danielwegener.logback.kafka.KafkaAppender">
+        <encoder class="com.github.danielwegener.logback.kafka.encoding.LayoutKafkaMessageEncoder">
             <layout class="ch.qos.logback.classic.PatternLayout">
-                <pattern>%date - %-5p %t %-25logger{5} %F:%L %m%n</pattern>
+                <pattern>logs %date - %-5p %t %-25logger{5} %F:%L %m%n</pattern>
             </layout>
         </encoder>
-
-        <topic>test-topic</topic>
-
-        <keyingStrategy
-            class="com.github.danielwegener.logback.kafka.keying.RoundRobinKeyingStrategy"/>
-        <deliveryStrategy
-            class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy"/>
-
+        <topic>beom-topic</topic>
+        <keyingStrategy class="com.github.danielwegener.logback.kafka.keying.RoundRobinKeyingStrategy"/>
+        <deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy"/>
         <producerConfig>retries=1</producerConfig>
         <producerConfig>bootstrap.servers=localhost:9092</producerConfig>
         <producerConfig>compression.type=snappy</producerConfig>
         <producerConfig>max.block.ms=1000</producerConfig>
-
     </appender>
-
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%date - %-5p %t %-25logger{5} %F:%L %m%n</pattern>
+            <pattern>logs %date - %-5p %t %-25logger{5} %F:%L %m%n</pattern>
         </encoder>
     </appender>
 
     <logger name="kafka-logger" level="INFO" additivity="false">
         <appender-ref ref="LOG-KAFKA"/>
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="STDOUT"/>
     </logger>
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
     </root>
-
 </configuration>
+
+<!--로그를 Logstash로 보내기위한 설정-->
+<!--
+<configuration>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%-5level %d{HH:mm:ss.SSS} [%thread] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="stash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>127.0.0.1:50000</destination>
+        &lt;!&ndash; encoder is required &ndash;&gt;
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+    </appender>
+    <root level="INFO">
+        <appender-ref ref="console"/>
+        <appender-ref ref="stash"/>
+    </root>
+</configuration>
+-->
+
+
+
